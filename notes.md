@@ -10,3 +10,9 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt-get update && sudo apt-get install spotify-client
 
 generate SDK token at
+https://developer.spotify.com/documentation/web-playback-sdk/quick-start/#
+
+-----------------
+TODO: Make webapp, scrape with selenium, play audio
+
+
