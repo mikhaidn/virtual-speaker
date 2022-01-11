@@ -6,8 +6,11 @@ from discord_slash.utils.manage_commands import create_choice, create_option
 import json 
 from flask import Flask, redirect, request
 import startup
+from multiprocessing import Process
 
 app = Flask("virtual speaker")
+
+
 
 @app.route('/')
 def index():
@@ -18,7 +21,9 @@ def index():
 def callback():
     startup.getUserToken(request.args['code'])
 
-with open("config.json") as file:
+    return redirect("http://localhost:3000")
+
+with open("config.json", 'r') as file:
     config = json.load(file)
 
 guild_ids = [688477783999119410]
@@ -41,8 +46,7 @@ async def _hello(ctx:SlashContext):
 )
 async def _authenticate(ctx:SlashContext):
     authURL = startup.getUser()
-    await ctx.author.send(authURL)
-    await ctx.send("Connecting!")
+    await ctx.author.send("Click here to login: [login]("+ authURL+")")
 
 
 @slash.slash(
@@ -70,12 +74,22 @@ async def _join(ctx):
 async def _leave(ctx):
     await ctx.voice_client.disconnect()
 
-def main():
-    print( "running")
+def discordRunner():
+    print("Starting discord bot")
     client.run(config["DISCORD_TOKEN"])
     print("made a discord bot")
+
+def flaskRunner():
+    print("Starting Flask")
     app.run(host='0.0.0.0')
-    print("made the flask app")
+    print ("flask webserver is running")
+
+
+def main():
+    dp = Process(target=discordRunner)
+    fp = Process(target=flaskRunner)
+    dp.start()
+    fp.start()
 
 if __name__ == "__main__":
     main()
