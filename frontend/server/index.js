@@ -11,7 +11,7 @@ dotenv.config()
 var spotify_client_id = process.env.SPOTIFY_CLIENT_ID
 var spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET
 
-var spotify_redirect_uri = 'http://localhost:3000/auth/callback'
+var spotify_redirect_uri = 'http://localhost:3000/callback'
 
 var generateRandomString = function (length) {
   var text = '';
@@ -27,6 +27,7 @@ var app = express();
 
 app.get('/auth/login', (req, res) => {
 
+  console
   var scope = "streaming user-read-email user-read-private"
   var state = generateRandomString(16);
 
