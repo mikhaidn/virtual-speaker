@@ -3,3 +3,5 @@ Scripts/
 __pycache__/*
 debug.log
 *.cfg
+config.json
+.env
