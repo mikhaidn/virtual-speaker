@@ -9,8 +9,10 @@ class SpotifyAuthenticator:
     TOKEN_DATA = []
 
     def __init__(self,redirect_uri):
-        self.CLIENT_ID = "f55246be7e964b7db05bedb924517f96"
-        self.CLIENT_SECRET = "822ef5c85cc144c1b5a2185449513c5d"
+        
+#       sensitive, refactor locally with spotify app client/secret
+        self.CLIENT_ID = None
+        self.CLIENT_SECRET = None
 
         #Add needed scope from spotify user
         self.SCOPE = "streaming%20user-read-email%20user-read-private"
